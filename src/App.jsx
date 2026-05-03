@@ -1,122 +1,138 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useMemo, useState } from "react";
+import "./App.css";
+
+const initialTasks = [
+  { id: 1, title: "Read React notes", completed: true },
+  { id: 2, title: "Build a small component", completed: false },
+  { id: 3, title: "Practice useState", completed: false },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState(initialTasks);
+  const [filter, setFilter] = useState("all");
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+
+  const filteredTasks = useMemo(() => {
+    if (filter === "completed") {
+      return tasks.filter((task) => task.completed);
+    }
+
+    if (filter === "pending") {
+      return tasks.filter((task) => !task.completed);
+    }
+
+    return tasks;
+  }, [filter, tasks]);
+
+  const completedCount = tasks.filter((task) => task.completed).length;
+  const pendingCount = tasks.length - completedCount;
+
+  function markComplete(id) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id ? { ...task, completed: true } : task
+      )
+    );
+  }
+
+  function addTask(event) {
+    event.preventDefault();
+
+    const title = newTaskTitle.trim();
+    if (!title) return;
+
+    setTasks((currentTasks) => [
+      ...currentTasks,
+      {
+        id: currentTasks.length
+          ? Math.max(...currentTasks.map((task) => task.id)) + 1
+          : 1,
+        title,
+        completed: false,
+      },
+    ]);
+
+    setNewTaskTitle("");
+    setFilter("all");
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <main className="app">
+      <section className="card">
+        <p className="eyebrow">Mini React Practice</p>
+        <h1>Task Filter</h1>
+        <p className="subtitle">
+          Filter tasks and mark pending work as completed.
+        </p>
+
+        <div className="stats">
+          <span>Total: {tasks.length}</span>
+          <span>Completed: {completedCount}</span>
+          <span>Pending: {pendingCount}</span>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+
+        <form className="add-task-form" onSubmit={addTask}>
+          <input
+            type="text"
+            placeholder="Add a new task"
+            value={newTaskTitle}
+            onChange={(event) => setNewTaskTitle(event.target.value)}
+            aria-label="New task title"
+          />
+          <button type="submit">Add Task</button>
+        </form>
+
+        <div className="filters">
+          <button
+            type="button"
+            className={filter === "all" ? "active" : ""}
+            onClick={() => setFilter("all")}
+          >
+            All
+          </button>
+          <button
+            type="button"
+            className={filter === "completed" ? "active" : ""}
+            onClick={() => setFilter("completed")}
+          >
+            Completed
+          </button>
+          <button
+            type="button"
+            className={filter === "pending" ? "active" : ""}
+            onClick={() => setFilter("pending")}
+          >
+            Pending
+          </button>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+
+        <ul className="task-list">
+          {filteredTasks.length === 0 ? (
+            <li className="empty">No tasks match this filter.</li>
+          ) : (
+            filteredTasks.map((task) => (
+              <li className="task-item" key={task.id}>
+                <div>
+                  <h2>{task.title}</h2>
+                  <p className={task.completed ? "status done" : "status pending"}>
+                    {task.completed ? "Completed" : "Pending"}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  disabled={task.completed}
+                  onClick={() => markComplete(task.id)}
+                >
+                  {task.completed ? "Done" : "Mark Complete"}
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
       </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    </main>
+  );
 }
 
-export default App
+export default App;
