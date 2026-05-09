@@ -68,3 +68,19 @@ This repository helps in practicing:
 
 ```bash
 npm install
+
+📁 Project Structure
+src/
+  App.jsx
+  ExpenseTracker.jsx
+  StudentManagementV2.jsx
+
+🔮 Future Improvements
+Improve UI and responsiveness
+Add more React mini-projects
+Reuse more components
+Add backend integration in future
+Deploy selected projects online
+
+👨‍💻 Author
+Swastik Jha
