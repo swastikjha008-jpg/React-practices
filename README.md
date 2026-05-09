@@ -1,87 +1,70 @@
-# ⚛️ React Practices
+# React Practices ⚛️
 
-A collection of small React projects, components, and experiments built while learning and improving React skills.
+A collection of interactive React projects built to strengthen frontend development skills through hands-on practice.
 
----
+## 📌 Overview
 
-## 🚀 Purpose
+This repository contains small but practical React projects created while learning modern frontend development. The goal is to improve React fundamentals, problem-solving ability, project structure, and UI building through real working applications.
 
-This repository is focused on:
+## ✨ Projects Included
 
-* Practicing core React concepts
-* Building reusable components
-* Understanding real-world patterns
-* Improving code structure and project organization
+### 💰 Expense Tracker
+A clean and simple expense management app that helps users add, delete, filter, and track expenses.
 
----
+**Features**
+- Add new expenses
+- Delete expense entries
+- Filter by category
+- View total amount
+- Save data using localStorage
 
-## 📂 What’s Inside
+### 🎓 Student Management v2
+A lightweight student dashboard built with React as a modern website version of a student management system.
 
-This repo includes multiple mini-projects and exercises such as:
+**Features**
+- Add student records
+- Edit student details
+- Delete student data
+- Search by name, roll number, or department
+- Filter by student status
+- View dashboard statistics
+- Save data using localStorage
 
-* UI components (buttons, cards, forms, etc.)
-* Small apps (Todo app, counters, etc.)
-* State management practice
-* Hooks usage (`useState`, `useEffect`, etc.)
-* Basic project structures
+### ✅ Task Filter App
+A small task management app created for practicing React state updates and filtering.
 
-Each folder represents a separate practice project.
-
----
+**Features**
+- Add new tasks
+- Mark tasks as completed
+- Filter by all, completed, and pending
+- Show task counts
 
 ## 🛠️ Tech Stack
 
-* React (Functional Components)
-* JavaScript (ES6+)
-* HTML5 & CSS3
-* (Optional) Vite / Create React App
+- React
+- JavaScript
+- Vite
+- HTML
+- CSS
+- localStorage
 
----
+## 🎯 Learning Goals
 
-## ▶️ Getting Started
+This repository helps in practicing:
 
-Clone the repository:
+- React components
+- `useState`
+- `useEffect`
+- `useMemo`
+- form handling
+- conditional rendering
+- filtering and searching
+- updating state
+- local storage integration
 
-```bash
-git clone https://github.com/your-username/react-practices.git
-cd react-practices
-```
+## 🚀 Getting Started
 
-Install dependencies (inside a project folder):
+### Install dependencies
 
 ```bash
 npm install
-```
-
-Run the project:
-
-```bash
-npm run dev
-```
-
----
-
-## 📈 Goals
-
-* Master React fundamentals
-* Write clean and maintainable code
-* Build strong frontend foundations
-* Prepare for real-world projects
-
----
-
-## 📌 Note
-
-This is a learning repository, so code quality and structure will improve over time as skills grow.
-
----
-
-## 🤝 Contributions
-
-Not open for contributions right now — this is a personal learning repo.
-
----
-
-## ⭐ Support
-
-If you find this useful, consider giving it a star ⭐
