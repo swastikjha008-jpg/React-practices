@@ -76,6 +76,8 @@ src/
   StudentManagementV2.jsx
 
 🔮 Future Improvements
+
+Add new features
 Improve UI and responsiveness
 Add more React mini-projects
 Reuse more components
