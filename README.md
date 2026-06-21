@@ -81,7 +81,6 @@ Add new features
 Improve UI and responsiveness
 Add more React mini-projects
 Reuse more components
-Add backend integration in future
 Deploy selected projects online
 
 👨‍💻 Author
